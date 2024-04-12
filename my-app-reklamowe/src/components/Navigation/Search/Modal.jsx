@@ -1,18 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
+import PopularLinks from "./Links";
+import ModalNavigation from "./ModalNavigation"
 
-const InputSearch = styled.input`
-  width: 100%;
-  border-radius: 0.375rem;
-  font-size: inherit;
-  padding: 0.5rem 1rem;
-  line-height: 25.5px;
-  box-sizing: border-box;
-  border: 1px solid #dee2e6;
-`;
 
 const ButtonSearch = styled.button`
   border: 1px solid #dadada;
@@ -24,8 +17,11 @@ const ButtonSearch = styled.button`
   cursor: pointer;
   max-width: 15rem;
   background: none;
+  
+  &:focus {
+    outline: none;
+  }
 `;
-
 const ButtonSearchText = styled.div`
   align-items: center;
   align-self: stretch;
@@ -48,29 +44,30 @@ const ButtonSearchIcon = styled.div`
   justify-content: center;
 `;
 
+const BoxContainer = styled.div`
+  padding: 20px;
+`;
+
 const style = {
   position: "absolute",
-  top: "12%",
+  top: "32%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 500,
+  minHeight: 520,
   bgcolor: "background.paper",
   border: "none",
   borderRadius: "0.5rem",
   boxShadow: 24,
   p: 4,
+  padding: 0,
+  outline: 'none',
 };
 
 export default function BasicModal() {
   const [open, setOpen] = useState(false);
-  const inputRef = useRef(null);
   const handleClose = () => setOpen(false);
-  const handleModalOpen = () => {
-    setOpen(true);
-    setTimeout(() => {
-      inputRef.current.focus();
-    }, 200);
-  };
+  const handleModalOpen = () => setOpen(true);
 
   return (
     <div style={{ maxWidth: "15rem", width: "100%" }}>
@@ -87,7 +84,10 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <InputSearch ref={inputRef} placeholder="Szukaj produktu" />
+          <BoxContainer>
+            <PopularLinks open={open} />
+          </BoxContainer>
+         <ModalNavigation/>
         </Box>
       </Modal>
     </div>

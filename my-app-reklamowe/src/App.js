@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './pages/Home';
 import Header from './components/Header/Header';
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/Navigation/index';
 
 function App() {
   return (

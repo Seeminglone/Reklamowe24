@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiPopover-paper {
+  margin-top: 1rem;
+  
+}
+.MuiMenu-paper {
+  overflow: visible !important;
+}

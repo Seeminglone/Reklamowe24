@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import KeyLockPng from "../../assets/keylock.png";
 import BasketPng from "../../assets/basket.png";
 
-import SearchModal from "./SearchModal"
+import SearchModal from "./Search/Modal"
+
+import OfertaGadzetow from "./OfertaGadzetow/index"
+import OfertaTematyczna from "./OfertaTematyczna"
+import RabatyIPromocje from "./RabatyIPromocje"
+
 
 const Nav = styled.nav`
 border-bottom: 1px solid #eeeeee;
@@ -70,20 +74,14 @@ function Navigation() {
         <Ul>
           <Span>
             <Li>
-              <StyledButton>
-                Oferta gadżetów <ArrowDropDownIcon sx={{ color: "black" }} />
-              </StyledButton>
+              <OfertaGadzetow/>
             </Li>
           </Span>
           <Li>
-            <StyledButton>
-              Oferta tematyczna <ArrowDropDownIcon sx={{ color: "black" }} />
-            </StyledButton>
+            <OfertaTematyczna/>
           </Li>
           <Li>
-            <StyledButton>
-              Rabaty i promocje <ArrowDropDownIcon sx={{ color: "black" }} />
-            </StyledButton>
+            <RabatyIPromocje/>
           </Li>
           <Li>
             <StyledButton>Kontakt</StyledButton>
