@@ -9,19 +9,20 @@ import ProductPage from "./pages/Product";
 import LoginPage from "./pages/Login";
 import CartPage from "./pages/Cart";
 
+import { NewsProvider } from "./contexts/bestcellery";
+
 const GlobalContainer = styled.div`
-  width: 100%;
   margin-right: auto;
   margin-left: auto;
   max-width: 1750px;
   padding: 0rem 1.5rem;
-  box-sizing: border-box;
 `;
 
 function App() {
   return (
     <div>
       <BrowserRouter>
+      <NewsProvider>
         <Header />
         <Navigation />
         <GlobalContainer>
@@ -33,6 +34,7 @@ function App() {
             <Route path="/products/:category/:item?" element={<ProductPage/>} />
           </Routes>
         </GlobalContainer>
+        </NewsProvider>
       </BrowserRouter>
     </div>
   );

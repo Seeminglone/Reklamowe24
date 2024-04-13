@@ -38,8 +38,8 @@ const SubMenuContextContainer = styled.section`
   padding: 0 18px;
   margin-top: 0.25rem;
   box-sizing: border-box;
-  overflow: visible; /* Allow overflow */
-  z-index: 1; /* Ensure content inside is above image */
+  overflow: visible;
+  z-index: 1;
 `;
 
 const Link = styled.div`
@@ -74,6 +74,7 @@ export default function OfertaGadzetow() {
   const [anchorEl, setAnchorEl] = useState(null);
   const menuRef = useRef(null);
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
 
   const handleClick = (event) => {
     setOpen((prevOpen) => !prevOpen);
@@ -105,16 +106,29 @@ export default function OfertaGadzetow() {
       }
     };
 
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (currentScrollPos > prevScrollPos) {
+        setOpen(false);
+        setAnchorEl(null);
+        setSelectedMenuItem(null);
+      }
+      setPrevScrollPos(currentScrollPos);
+    };
+
     if (open) {
       document.addEventListener("mousedown", handleCloseMenu);
+      window.addEventListener("scroll", handleScroll);
     } else {
       document.removeEventListener("mousedown", handleCloseMenu);
+      window.removeEventListener("scroll", handleScroll);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleCloseMenu);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [open]);
+  }, [open, prevScrollPos]);
 
   return (
     <div>
@@ -127,7 +141,7 @@ export default function OfertaGadzetow() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{ marginTop: "-29rem", position: "static ! important" }}
+        sx={{ top: "0 !important" }}
         TransitionProps={{ timeout: 0 }}
         ref={menuRef}
       >

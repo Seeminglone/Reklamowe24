@@ -18,6 +18,7 @@ const StyledButton = styled.button`
 export default function RabatyIPromocje() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,16 +35,27 @@ export default function RabatyIPromocje() {
       }
     };
 
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (currentScrollPos > prevScrollPos) {
+        setAnchorEl(null);
+      }
+      setPrevScrollPos(currentScrollPos);
+    };
+
     if (open) {
       document.addEventListener("click", handleCloseMenu);
+      window.addEventListener("scroll", handleScroll);
     } else {
       document.removeEventListener("click", handleCloseMenu);
+      window.removeEventListener("scroll", handleScroll);
     }
 
     return () => {
       document.removeEventListener("click", handleCloseMenu);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [open, anchorEl]);
+  }, [open, anchorEl, prevScrollPos]);
 
   return (
     <div>
@@ -57,7 +69,7 @@ export default function RabatyIPromocje() {
         open={open}
         onClose={handleClose}
         TransitionProps={{ timeout: 0 }}
-        sx={{ marginTop: "-29rem", position:'static ! important' }}
+        sx={{ top: "0 !important" }}
       >
         <MenuItem onClick={handleClose}>Produkty w niższych cenach</MenuItem>
         <MenuItem onClick={handleClose}>Promocja miesiąca</MenuItem>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import MenuIItemImg from "../../../assets/menu-product.png";
+import { Stack, Alert } from "@mui/material";
+
 
 const SectionNews = styled.div`
   display: block;
@@ -54,8 +56,39 @@ const MenuItemImage = styled.img`
 `;
 
 const SubmenuContent = () => {
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const handleClick = (message) => {
+    setAlertMessage(message);
+    setTimeout(() => {
+      setAlertMessage(null);
+    }, 1500);
+  };
+
+  const handleCloseAlert = () => {
+    setAlertMessage(null);
+  };
+
   return (
     <>
+     {alertMessage && (
+        <Stack
+          sx={{
+            width: "100%",
+            position: "fixed",
+            bottom: 16,
+            justifyContent: "center",
+            alignItems: "center",
+            
+            zIndex: "1000",
+          }}
+          spacing={2}
+        >
+          <Alert severity="error" onClose={handleCloseAlert} sx={{marginRight:'25rem !important',}}>
+            {alertMessage}
+          </Alert>
+        </Stack>
+      )}
       <SectionNews>
         <span>Nowość</span>
       </SectionNews>
@@ -67,7 +100,7 @@ const SubmenuContent = () => {
         wypełniaczem.
       </SectionText>
       <SectionButtonContainer>
-        <ButtonGiftBox>Stwórz giftbox</ButtonGiftBox>
+        <ButtonGiftBox onClick={() => handleClick("Strona nie jest dostępna")}>Stwórz giftbox</ButtonGiftBox>
       </SectionButtonContainer>
       <MenuItemImage src={MenuIItemImg} alt="Menu Item"></MenuItemImage>
     </>

@@ -11,10 +11,13 @@ import OfertaTematyczna from "./OfertaTematyczna";
 import RabatyIPromocje from "./RabatyIPromocje";
 
 const Nav = styled.nav`
-  border-bottom: 1px solid #eeeeee;
-  position: sticky !important;
-  padding-bottom: 0.5rem !important;
-  padding-top: 0.5rem !important;
+z-index: 2;
+    background: white;
+    border-bottom: 1px solid #eeeeee;
+    position: sticky !important;
+    padding-bottom: 0.5rem !important;
+    top: 0 !important;
+    padding-top: 0.5rem !important;
  
 `;
 
