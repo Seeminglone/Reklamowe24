@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import jsonData from "./DoBiura.json";
+import { normalizePolishToEnglish } from "../../../../utils/helpers/NormalizeLanguage";
 
 const Container = styled.div`
   display: flex;
@@ -39,36 +41,63 @@ const Link = styled.a`
     color: #888;
   }
 `;
-export default function DoBiura() {
+export default function DoBiura({closeMenu }) {
+  const navigate = useNavigate();
+
+  const handleClick = (category, item) => {
+    const categoryWithHyphens = normalizePolishToEnglish(category).replace(
+      /\s+/g,
+      "-"
+    );
+
+    const itemWithHyphens = item
+      ? normalizePolishToEnglish(item).replace(/\s+/g, "-")
+      : null;
+
+    let url = `/products/${encodeURIComponent(categoryWithHyphens)}`;
+    if (item) {
+      url += `/${encodeURIComponent(itemWithHyphens)}`;
+    }
+    navigate(url);
+    closeMenu();
+  };
   return (
     <Container>
       <div>
-        <Title>Gadżety biurowe</Title>
+        <Title onClick={() => handleClick("Gadżety biurowe")}>
+          Gadżety biurowe
+        </Title>
         <Ul>
           {jsonData["Gadżety biurowe"].map((item, index) => (
             <li key={index}>
-              <Link>{item}</Link>
+              <Link onClick={() => handleClick("Gadżety biurowe", item)}>
+                {item}
+              </Link>
             </li>
           ))}
         </Ul>
       </div>
 
       <div>
-        <Title>Długopisy reklamowe</Title>
+        <Title onClick={() => handleClick("Długopisy reklamowe")}>
+          Długopisy reklamowe
+        </Title>
         <Ul>
           {jsonData["Długopisy reklamowe"].map((item, index) => (
             <li key={index}>
-              <Link>{item}</Link>
+              <Link onClick={() => handleClick("Długopisy reklamowe", item)}>
+                {item}
+              </Link>
             </li>
           ))}
         </Ul>
       </div>
       <div>
-        <Title>Inne</Title>
+        <Title onClick={() => handleClick("Inne")}>Inne</Title>
         <Ul>
           {jsonData["Inne"].map((item, index) => (
             <li key={index}>
-              <Link>{item}</Link>
+              <Link onClick={() => handleClick("Inne", item)}>{item}</Link>
             </li>
           ))}
         </Ul>

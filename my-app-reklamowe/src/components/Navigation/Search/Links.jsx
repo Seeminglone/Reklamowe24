@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import MovingIcon from "@mui/icons-material/Moving";
+import { useNavigate } from "react-router-dom";
+import { normalizePolishToEnglish } from "../../../utils/helpers/NormalizeLanguage";
 
 const InputSearch = styled.input`
   width: 100%;
@@ -26,8 +28,9 @@ const PopularNameItems = styled.div`
 `;
 
 const NoFoundText = styled.span`
-display: flex;
-justify-content: center;`
+  display: flex;
+  justify-content: center;
+`;
 
 const StyledLink = styled.a`
   background: #fff;
@@ -39,6 +42,7 @@ const StyledLink = styled.a`
   display: block;
   text-decoration: none;
   color: black;
+  cursor: pointer;
   border-radius: ${(props) => props.borderRadius || "0.5rem"};
 
   &:hover {
@@ -55,7 +59,7 @@ const StyledLink = styled.a`
   &:active,
   &.clicked {
     background-color: #f8f9fa;
-    border: 1px solid  #dee2e6;
+    border: 1px solid #dee2e6;
     color: black;
   }
 
@@ -81,38 +85,46 @@ const StyledLink = styled.a`
   }
 `;
 
-export default function PopularLinks({ open }) {
+export default function PopularLinks({ open, handleClose }) {
+  const navigate = useNavigate();
   const [focusedIndex, setFocusedIndex] = useState(null);
   const [clickedIndex, setClickedIndex] = useState(null);
   const [searchLetter, setSearchLetter] = useState("");
   const [filteredLinks, setFilteredLinks] = useState([]);
   const inputRef = useRef(null);
   const linksRef = useRef([
-    { text: "Torby na zakupy", href: "/"},
-    { text: "Bidony i butelki", href: "/", borderRadius: "0rem" },
-    { text: "Torby bawełniane", href: "/", borderRadius: "0rem" },
-    { text: "T-shirty", href: "/", borderRadius: "0rem" },
-    { text: "Polary", href: "/", borderRadius: "0rem" },
+    { text: "Torby na zakupy" },
+    { text: "Bidony i butelki", borderRadius: "0rem" },
+    { text: "Torby bawełniane", borderRadius: "0rem" },
+    { text: "T-shirty", borderRadius: "0rem" },
+    { text: "Polary", borderRadius: "0rem" },
   ]);
 
   useEffect(() => {
     if (open && inputRef.current) {
       setTimeout(() => {
         inputRef.current.focus();
-      }, 300);
-    }// eslint-disable-next-line
+      }, 0);
+    } // eslint-disable-next-line
   }, [open, inputRef.current]);
-
 
   useEffect(() => {
     setFilteredLinks(
       linksRef.current.filter((link) =>
         link.text.toLowerCase().startsWith(searchLetter.toLowerCase())
       )
-    );// eslint-disable-next-line
+    ); // eslint-disable-next-line
   }, [searchLetter]);
 
   const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      const productText = normalizePolishToEnglish(
+        filteredLinks[focusedIndex].text
+      ).replace(/\s+/g, "-");
+      navigate(`/products/${productText}`);
+
+      handleClose();
+    }
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
       event.preventDefault();
       let nextIndex;
@@ -131,8 +143,6 @@ export default function PopularLinks({ open }) {
       if (nextIndex !== focusedIndex) {
         setFocusedIndex(nextIndex);
       }
-    } else if (event.key === "Enter" && focusedIndex !== null) {
-      window.location.href = filteredLinks[focusedIndex].href;
     }
   };
 
@@ -145,14 +155,25 @@ export default function PopularLinks({ open }) {
 
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
-    };// eslint-disable-next-line
+    }; // eslint-disable-next-line
   }, [focusedIndex, filteredLinks]);
 
   const handleClick = (index, event) => {
-    if (event.clientX !== undefined && event.clientY !== undefined) {
+    if (
+      event.clientX !== undefined &&
+      event.clientY !== undefined &&
+      event.key !== "Enter"
+    ) {
       setClickedIndex(index);
     }
     setFocusedIndex(index);
+    const categoryWithHyphens = normalizePolishToEnglish(
+      filteredLinks[index].text
+    ).replace(/\s+/g, "-");
+
+    navigate(`/products/${categoryWithHyphens}`);
+
+    handleClose();
   };
 
   const handleMouseLeave = () => {
@@ -164,11 +185,10 @@ export default function PopularLinks({ open }) {
     setFocusedIndex(null);
   };
 
-  
   useEffect(() => {
     if (focusedIndex !== null && focusedIndex >= filteredLinks.length) {
       setFocusedIndex(filteredLinks.length - 1);
-    }// eslint-disable-next-line
+    } // eslint-disable-next-line
   }, [filteredLinks]);
 
   return (
@@ -180,15 +200,17 @@ export default function PopularLinks({ open }) {
         placeholder="Szukaj produktu"
       />
       {filteredLinks.length === 0 ? (
-        <NoFoundText>
-          Nie znaleziono żadnego produktu
-        </NoFoundText>
+        <NoFoundText>Nie znaleziono żadnego produktu</NoFoundText>
       ) : (
         filteredLinks.map((link, index) => (
           <StyledLink
             key={index}
             href={link.href}
-            borderRadius={(filteredLinks.length === 1 && index === 0) ? "0.5rem" : link.borderRadius}
+            borderRadius={
+              filteredLinks.length === 1 && index === 0
+                ? "0.5rem"
+                : link.borderRadius
+            }
             tabIndex="0"
             onFocus={() => setFocusedIndex(index)}
             onClick={(event) => handleClick(index, event)}
@@ -198,7 +220,12 @@ export default function PopularLinks({ open }) {
               ${clickedIndex === index ? "clicked" : ""} 
               ${index === 0 ? "first" : ""} 
               ${filteredLinks.length === 1 && index === 0 ? "border__none" : ""}
-              ${index === filteredLinks.length - 1 && !(filteredLinks.length === 1 && index === 0) ? "last" : ""} 
+              ${
+                index === filteredLinks.length - 1 &&
+                !(filteredLinks.length === 1 && index === 0)
+                  ? "last"
+                  : ""
+              } 
               ${link.className}
             `}
           >

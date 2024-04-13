@@ -48,7 +48,7 @@ export default function RabatyIPromocje() {
   return (
     <div>
       <StyledButton onClick={handleClick}>
-        Oferta tematyczna <ArrowDropDownIcon sx={{ color: "black" }} />
+        Rabaty i promocje <ArrowDropDownIcon sx={{ color: "black" }} />
       </StyledButton>
 
       <Menu
@@ -57,7 +57,7 @@ export default function RabatyIPromocje() {
         open={open}
         onClose={handleClose}
         TransitionProps={{ timeout: 0 }}
-        sx={{ marginTop: "1rem", position:'static ! important' }}
+        sx={{ marginTop: "-29rem", position:'static ! important' }}
       >
         <MenuItem onClick={handleClose}>Produkty w niższych cenach</MenuItem>
         <MenuItem onClick={handleClose}>Promocja miesiąca</MenuItem>

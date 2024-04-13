@@ -7,7 +7,7 @@ import PopularLinks from "./Links";
 import ModalNavigation from "./ModalNavigation"
 
 
-const ButtonSearch = styled.button`
+const ButtonSearch = styled.a`
   border: 1px solid #dadada;
   border-radius: 50px;
   display: flex;
@@ -85,7 +85,7 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <BoxContainer>
-            <PopularLinks open={open} />
+            <PopularLinks open={open} handleClose={handleClose}/>
           </BoxContainer>
          <ModalNavigation/>
         </Box>

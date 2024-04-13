@@ -57,7 +57,7 @@ export default function OfertaTematyczna() {
         open={open}
         onClose={handleClose}
         TransitionProps={{ timeout: 0 }}
-        sx={{ marginTop: "1rem", position:'static ! important' }}
+        sx={{ marginTop: "-29rem", position:'static ! important' }}
       >
         <MenuItem onClick={handleClose}>Nasze Bestsellery</MenuItem>
         <MenuItem onClick={handleClose}>Gadżety markowe</MenuItem>

@@ -14,7 +14,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
   padding: 0;
 `;
 
@@ -80,6 +80,12 @@ export default function OfertaGadzetow() {
     setAnchorEl(event.currentTarget);
   };
 
+  const closeMenu = () => {
+    setOpen(false);
+    setAnchorEl(null);
+    setSelectedMenuItem(null);
+  };
+
   const handleMenuLinks = (event, menuItem) => {
     setSelectedMenuItem(menuItem);
   };
@@ -121,7 +127,7 @@ export default function OfertaGadzetow() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        sx={{ marginTop: "1rem", position: "static ! important" }}
+        sx={{ marginTop: "-29rem", position: "static ! important" }}
         TransitionProps={{ timeout: 0 }}
         ref={menuRef}
       >
@@ -141,7 +147,10 @@ export default function OfertaGadzetow() {
           <SubMenuContextContainer>
             {!selectedMenuItem && <SubmenuContent />}
             {selectedMenuItem && (
-              <div>{selectedMenuItem === "Do biura" && <DoBiura />}</div>
+              <div>{selectedMenuItem === "Do biura" && <DoBiura closeMenu={closeMenu} />}</div>
+            )}
+            {selectedMenuItem && (
+              <div>{selectedMenuItem !== "Do biura" && <h3>Przykład pracy podany na wkładce Do biura</h3>}</div>
             )}
           </SubMenuContextContainer>
         </Container>

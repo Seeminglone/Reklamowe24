@@ -3,6 +3,7 @@ import logo from "../../assets/logo.png";
 import styled from "styled-components";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   background-color: #fff;
@@ -17,7 +18,8 @@ const HeaderContainer = styled.div`
 const Container = styled.div`
   width: 100%;
   padding: 0rem 1.5rem;
-  box-sizing: border-box;
+  max-width: 1750px;
+  margin: auto;
 `;
 const HeaderContext = styled.div`
   display: flex;
@@ -87,7 +89,9 @@ function Header() {
       <Container>
         <HeaderContext>
           <HeaderLogo>
-            <StyledImage src={logo} alt="logo-reklamowe24"></StyledImage>
+            <Link to="/">
+              <StyledImage src={logo} alt="logo-reklamowe24"></StyledImage>
+            </Link>
           </HeaderLogo>
           <HeaderContact>
             <ContactMail>
@@ -95,7 +99,14 @@ function Header() {
                 sx={{ color: "black", width: "37px", height: "29px" }}
               />
               {showEmail ? null : <span>biuro@</span>}
-              {showEmail ? <a href="mailto:biuro@reklamowe24.pl" style={{color:"#0a94d6"}}>biuro@reklamowe24.pl</a> : null}
+              {showEmail ? (
+                <a
+                  href="mailto:biuro@reklamowe24.pl"
+                  style={{ color: "#0a94d6" }}
+                >
+                  biuro@reklamowe24.pl
+                </a>
+              ) : null}
               {showEmail ? null : (
                 <StyledButton onClick={handleClickShowEMail}>
                   Pokaż
@@ -107,7 +118,14 @@ function Header() {
                 sx={{ color: "black", width: "37px", height: "29px" }}
               />
               {showPhone ? null : <span>tel. 42</span>}
-              {showPhone ? <a href="mailto:biuro@reklamowe24.pl" style={{color:"#0a94d6"}}>tel. 42 630 55 15</a> : null}
+              {showPhone ? (
+                <a
+                  href="mailto:biuro@reklamowe24.pl"
+                  style={{ color: "#0a94d6" }}
+                >
+                  tel. 42 630 55 15
+                </a>
+              ) : null}
               {showPhone ? null : (
                 <StyledButton onClick={handleClickShowPhone}>
                   Pokaż
