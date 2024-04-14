@@ -10,15 +10,16 @@ import OfertaGadzetow from "./OfertaGadzetow/index";
 import OfertaTematyczna from "./OfertaTematyczna";
 import RabatyIPromocje from "./RabatyIPromocje";
 
+import theme from "../../Styles/theme";
+
 const Nav = styled.nav`
-z-index: 2;
-    background: white;
-    border-bottom: 1px solid #eeeeee;
-    position: sticky !important;
-    padding-bottom: 0.5rem !important;
-    top: 0 !important;
-    padding-top: 0.5rem !important;
- 
+  z-index: 2;
+  background: white;
+  border-bottom: 1px solid #eeeeee;
+  position: sticky !important;
+  padding-bottom: 0.5rem !important;
+  top: 0 !important;
+  padding-top: 0.5rem !important;
 `;
 
 const NavContainer = styled.div`
@@ -37,6 +38,9 @@ const Ul = styled.ul`
   align-items: center;
   flex-direction: row;
   gap: 1rem;
+  @media only screen and (max-width: ${theme.breakpointsCustom.cs}px) {
+    display: none;
+  }
 `;
 
 const Span = styled.span``;
@@ -64,6 +68,9 @@ const UserPanel = styled.div`
   flex-direction: row;
   margin-left: auto !important;
   gap: 1rem;
+  @media only screen and (max-width: ${theme.breakpointsCustom.max}px) {
+    display: none;
+  }
 `;
 
 const Login = styled(Link)`
@@ -96,10 +103,10 @@ function Navigation() {
         </Ul>
         <SearchModal />
         <UserPanel>
-          <Login to='/login'>
+          <Login to="/login">
             <img src={KeyLockPng} alt="Login" />
           </Login>
-          <Cart to='/cart'>
+          <Cart to="/cart">
             <img src={BasketPng} alt="Cart" />
           </Cart>
         </UserPanel>

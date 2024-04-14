@@ -1,20 +1,17 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 import "./styles.css";
 
-// import required modules
 import { FreeMode, Pagination } from "swiper/modules";
 import { Stack, Alert } from "@mui/material";
 import styled from "styled-components";
 
-import { NewsProvider, useNewsContext } from "../../contexts/bestcellery";
+import { useNewsContext } from "../../contexts/bestcellery";
 
 const PriceContainer = styled.div`
   align-items: flex-end;
@@ -81,9 +78,7 @@ const StyledImages = styled.img`
 `;
 
 export default function SliderBestcellery() {
-    const { posts } = useNewsContext();
-  console.log(posts);
-    
+  const { posts } = useNewsContext();
   const [alertMessage, setAlertMessage] = useState("");
 
   const handleClick = (message) => {
@@ -119,182 +114,60 @@ export default function SliderBestcellery() {
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
-        slidesPerGroup={11}
+        slidesPerGroup={1}
         freeMode={true}
         pagination={{
           clickable: true,
         }}
         modules={[FreeMode, Pagination]}
         className="mySwiper"
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 1,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 2,
+          },
+          920: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+          },
+          1300: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+          },
+        }}
       >
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <SpanTransform>Cena netto</SpanTransform>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <BestCellerContainer>
-            <BestCeller>
-              <ImageContainer>
-                <StyledImages src="https://gadzety-reklamowe.com/media/cache/resolve/small/common/image/products/10100900.jpg"></StyledImages>
-              </ImageContainer>
-              <ItemNameContainer>
-                Kolorowe okulary
-                <Span>Symbol: 10100900</Span>
-              </ItemNameContainer>
-              <PriceContainer>
-                <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
-                  {" "}
-                  cena od
-                </small>
-                <div>1,45 zł</div>
-                <Span>Cena netto</Span>
-              </PriceContainer>
-            </BestCeller>
-          </BestCellerContainer>
-        </SwiperSlide>
+        {posts.map((post) => (
+          <SwiperSlide
+            key={post.id}
+            onClick={() => handleClick("Strona nie jest dostępna")}
+          >
+            <BestCellerContainer>
+              <BestCeller>
+                <ImageContainer>
+                  <StyledImages
+                    src={post.image ? post.image : ""}
+                  ></StyledImages>
+                </ImageContainer>
+                <ItemNameContainer>
+                  {post.name}
+                  <Span>Symbol: {post.symbol}</Span>
+                </ItemNameContainer>
+                <PriceContainer>
+                  <small style={{ fontSize: "16px", marginBottom: "-10px" }}>
+                    {" "}
+                    cena od
+                  </small>
+                  <div>{post.price} zł</div>
+                  <SpanTransform>Cena netto</SpanTransform>
+                </PriceContainer>
+              </BestCeller>
+            </BestCellerContainer>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

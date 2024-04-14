@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import theme from "../../../Styles/theme";
 
 const NavigationButtons = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ const NavigationButtons = styled.div`
   box-sizing: border-box;
   width: 100%;
   bottom: 0;
+
+  @media only screen and (max-width: ${theme.breakpointsCustom.cs}px) {
+    padding: 10px;
+  }
 `;
 const Accept = styled.div`
   display: flex;

@@ -4,8 +4,8 @@ import Modal from "@mui/material/Modal";
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import PopularLinks from "./Links";
-import ModalNavigation from "./ModalNavigation"
-
+import ModalNavigation from "./ModalNavigation";
+import theme from "../../../Styles/theme";
 
 const ButtonSearch = styled.a`
   border: 1px solid #dadada;
@@ -17,9 +17,13 @@ const ButtonSearch = styled.a`
   cursor: pointer;
   max-width: 15rem;
   background: none;
-  
+
   &:focus {
     outline: none;
+  }
+  @media only screen and (max-width: ${theme.breakpointsCustom.cs}px) {
+    max-width: none;
+    width: 100%;
   }
 `;
 const ButtonSearchText = styled.div`
@@ -30,7 +34,7 @@ const ButtonSearchText = styled.div`
   flex-grow: 2;
   width: 100%;
   justify-content: start;
-  margin-right: 1rem;
+  margin-right: 3rem;
   font-size: 16px;
 `;
 
@@ -46,6 +50,19 @@ const ButtonSearchIcon = styled.div`
 
 const BoxContainer = styled.div`
   padding: 20px;
+  @media only screen and (max-width: ${theme.breakpointsCustom.cs}px) {
+    padding: 10px;
+  }
+`;
+
+const ModalContainer = styled.div`
+  max-width: "15rem";
+  width: "100%";
+
+  @media only screen and (max-width: ${theme.breakpointsCustom.cs}px) {
+    max-width: none;
+    width: 100%;
+  }
 `;
 
 const style = {
@@ -61,7 +78,11 @@ const style = {
   boxShadow: 24,
   p: 4,
   padding: 0,
-  outline: 'none',
+  outline: "none",
+  "@media only screen and (max-width: 920px)": {
+    width: 380,
+    top: "50%",
+  },
 };
 
 export default function BasicModal() {
@@ -70,7 +91,7 @@ export default function BasicModal() {
   const handleModalOpen = () => setOpen(true);
 
   return (
-    <div style={{ maxWidth: "15rem", width: "100%" }}>
+    <ModalContainer>
       <ButtonSearch onClick={handleModalOpen}>
         <ButtonSearchText>Szukaj produktu</ButtonSearchText>
         <ButtonSearchIcon>
@@ -85,11 +106,11 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <BoxContainer>
-            <PopularLinks open={open} handleClose={handleClose}/>
+            <PopularLinks open={open} handleClose={handleClose} />
           </BoxContainer>
-         <ModalNavigation/>
+          <ModalNavigation />
         </Box>
       </Modal>
-    </div>
+    </ModalContainer>
   );
 }

@@ -65,7 +65,7 @@ export default function SliderTop() {
         <StyledSwiperSlide
           onClick={() => handleClick("Strona nie jest dostępna")}
         >
-          <span >
+          <span>
             <img src={TorbyReklamoweImg} alt="TorbyReklamoweImg" />
           </span>
         </StyledSwiperSlide>
@@ -78,7 +78,7 @@ export default function SliderTop() {
             bottom: 16,
             justifyContent: "center",
             alignItems: "center",
-            zIndex:'1000'
+            zIndex: "1000",
           }}
           spacing={2}
         >

@@ -1,15 +1,12 @@
-import React, { useRef, useState } from "react";
-// Import Swiper React components
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
-import "./styles.css";
+import "./categories.css";
 
-// import required modules
 import { FreeMode, Pagination } from "swiper/modules";
 import { Stack, Alert } from "@mui/material";
 
@@ -78,6 +75,20 @@ export default function SliderCategories() {
         }}
         modules={[FreeMode, Pagination]}
         className="mySwiper"
+        breakpoints={{
+          0: {
+            slidesPerView: 3,
+            spaceBetween: 3,
+          },
+          768: {
+            slidesPerView: 6,
+            spaceBetween: 6,
+          },
+          920: {
+            slidesPerView: 11,
+            slidesPerGroup: 11,
+          },
+        }}
       >
         <SwiperSlide>
           <img
